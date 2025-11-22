@@ -69,7 +69,7 @@ with tab1:
     out3 = st.empty()
 
     if file_path3:
-        out2.write('저번주데이터를 성공적으로 올렸습니다~')
+        out3.write('저번주데이터를 성공적으로 올렸습니다~')
         try:
             df_lastweek = pd.read_excel(file_path3, engine='openpyxl', sheet_name='금액비교')
         except:
@@ -185,3 +185,4 @@ with tab2:
 
     else:
         st.write('파일을 불러와주세요.')
+
