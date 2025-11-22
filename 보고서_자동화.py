@@ -71,9 +71,9 @@ with tab1:
     if file_path3:
         out2.write('저번주데이터를 성공적으로 올렸습니다~')
         try:
-            df_lastweek = pd.read_excel(file_path, engine='openpyxl', sheet_name='금액비교')
+            df_lastweek = pd.read_excel(file_path3, engine='openpyxl', sheet_name='금액비교')
         except:
-            df_lastweek = pd.read_excel(file_path, engine='xlrd', sheet_name='금액비교')
+            df_lastweek = pd.read_excel(file_path3, engine='xlrd', sheet_name='금액비교')
 
     ''
     ''
@@ -127,15 +127,18 @@ with tab1:
             df3.to_excel(writer, sheet_name='금액비교', index=False)
             df4.to_excel(writer, sheet_name='주간업무내용', index=False)
 
-        # 버퍼의 내용 가져오기
-        excel_data = buffer.getvalue()
 
-        st.download_button(label='파일 다운로드', data=excel_data, file_name=f'{to_day}raw.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    else:
+        st.write('모든 파일을 업로드해주세요.')
+  
+    # 버퍼의 내용 가져오기
+    excel_data = buffer.getvalue()        
+    
+    if st.download_button(label='파일 다운로드', data=excel_data, file_name=f'{to_day}raw.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'):
 
         st.write ('다운로드 되었습니다.')
 
-    else:
-        st.write('파일 불러와주세요.')
+
 
 
 
