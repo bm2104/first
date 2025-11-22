@@ -44,31 +44,40 @@ with tab1:
     df2 = ''
 
     # 파일 로드 
-    file_path = st.file_uploader('저장소품목별단가 Excel 파일을 선택하세요.')
+    file_path = st.file_uploader('저장소품목별단가 Excel 파일을 선택하세요.', type=['xlsx', 'xls'])
     out1 = st.empty()
 
     if file_path:
         out1.write('저장소품목별단가를 성공적으로 올렸습니다~')
-        df = pd.read_excel(file_path)
+        try:
+            df = pd.read_excel(file_path, engine='openpyxl')
+        except:
+            df = pd.read_excel(file_path, engine='xlrd')
     '---'
-    file_path2 = st.file_uploader('구매입고리스트 Excel 파일을 선택하세요.')
+    file_path2 = st.file_uploader('구매입고리스트 Excel 파일을 선택하세요.', type=['xlsx', 'xls'])
     out2 = st.empty()
 
     if file_path2:
         out2.write('구매입고리스트를 성공적으로 올렸습니다~')
-        df2 = pd.read_excel(file_path2)
+        try:
+            df2 = pd.read_excel(file_path2, engine='openpyxl')
+        except:
+            df2 = pd.read_excel(file_path2, engine='xlrd')
 
     '---'
-    file_path3 = st.file_uploader('저번주데이터 Excel 파일을 선택하세요.')
+    file_path3 = st.file_uploader('저번주데이터 Excel 파일을 선택하세요.', type=['xlsx', 'xls'])
     out3 = st.empty()
 
     if file_path3:
         out2.write('저번주데이터를 성공적으로 올렸습니다~')
-        df_lastweek = pd.read_excel(file_path3, sheet_name='금액비교')
+        try:
+            df_lastweek = pd.read_excel(file_path, engine='openpyxl', sheet_name='금액비교')
+        except:
+            df_lastweek = pd.read_excel(file_path, engine='xlrd', sheet_name='금액비교')
 
     ''
-
     ''
+
     if file_path and file_path2 and file_path3:
         # 데이터 처리 
         df, df2 = process_data(df, df2)
