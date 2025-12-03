@@ -98,7 +98,7 @@ with tab1:
         df3 = df3.round()
 
         # dp 금액 증감 확인
-        hr = '증가' if df3["차액"][5] >0 else '김소'
+        hr = '증가' if df3["차액"][5] >0 else '감소'
 
         # 주간금액 불러오기
         wp = week_buy_price(df2, toDay, lastweek)
@@ -185,4 +185,5 @@ with tab2:
 
     else:
         st.write('파일을 불러와주세요.')
+
 
