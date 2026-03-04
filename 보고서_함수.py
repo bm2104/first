@@ -39,7 +39,8 @@ def process_data(df, df2):
     # how='left')
     
     # 원래 데이터프레임에 업데이트
-    df.loc[mask, '재고단가'] = df_temp['원화단가'].values
+    #df.loc[mask, '재고단가'] = df_temp['원화단가'].values
+    df.loc[mask, '재고단가'] = df_temp['원화단가'].reset_index(drop=True).values
     df['금액'] = df['재고단가'] * df['창고재고']
 
     return df, df2
@@ -125,6 +126,7 @@ def data_process(df, df2):
             df2 = df2[~df2[column].str.contains(value)]
 
     return df, df2
+
 
 
 
