@@ -32,15 +32,15 @@ def process_data(df, df2):
     df_temp = df[mask][['품목번호']].copy()
 
     # df2와 merge (중복이 있어도 작동)
-    df_temp = df_temp.merge(df2[['품목번호', '원화단가']], on='품목번호', how='left')
+    #df_temp = df_temp.merge(df2[['품목번호', '원화단가']], on='품목번호', how='left')
     # df_temp = df_temp.merge(
-    # df2[['품목번호', '원화단가']].drop_duplicates(subset='품목번호', keep='last'),
-    # on='품목번호',
-    # how='left')
+    df2[['품목번호', '원화단가']].drop_duplicates(subset='품목번호', keep='last'),
+    on='품목번호',
+    how='left')
     
     # 원래 데이터프레임에 업데이트
-    #df.loc[mask, '재고단가'] = df_temp['원화단가'].values
-    df.loc[mask, '재고단가'] = df_temp['원화단가'].reset_index(drop=True).values
+    df.loc[mask, '재고단가'] = df_temp['원화단가'].values
+    #df.loc[mask, '재고단가'] = df_temp['원화단가'].reset_index(drop=True).values
     df['금액'] = df['재고단가'] * df['창고재고']
 
     return df, df2
@@ -126,6 +126,7 @@ def data_process(df, df2):
             df2 = df2[~df2[column].str.contains(value)]
 
     return df, df2
+
 
 
 
